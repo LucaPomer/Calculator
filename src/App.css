@@ -15,7 +15,7 @@ body{
 
 h1 {
     font-family: monospace;
-    padding-top: 5%;
+    padding-top: 4%;
 }
 .inputArea{
     margin-left: 10rem;
@@ -35,15 +35,16 @@ input {
 }
 
 Button {
-    margin:  0.5rem 0.8rem 0.5rem 0.0rem !important;
+    margin:  0.5rem 0.5rem 0.5rem 0.0rem !important;
     border-width: medium !important;
     font-weight: bold !important;
     background-color: #ffffff !important;
     font-size: large;
     width: 4rem;
 }
+
 .buttonRow{
-    align-items: stretch;
+    align-self: center;
 }
 button:hover{background-color: #6095ff !important;}
 
