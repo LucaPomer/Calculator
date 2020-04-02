@@ -1,7 +1,12 @@
 .App {
     text-align: center;
-}
+    background-image: image("/img/notebook-page.jpg");
 
+}
+body{
+    background-image: url("img/notebook-page.jpg") ;
+    background-size: auto;
+}
 .App-logo {
     height: 40vmin;
     pointer-events: none;
