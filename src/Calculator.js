@@ -1,8 +1,10 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ListGroupItem from "react-bootstrap/ListGroupItem";
-import { create, all } from 'mathjs'
-
+import {all, create} from 'mathjs'
+import ListGroup from "react-bootstrap/ListGroup";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/esm/Col";
 
 
 class Calculator extends React.Component {
@@ -25,23 +27,29 @@ class Calculator extends React.Component {
         const numRight = this.state.numRight;
         return (
             <div>
-                <div className={"input area"}>
-                    <h1>Calculator</h1>
-                    <NumberInput
-                        numSide="l"
-                        handleNumChange={this.handleNumChangeLeft}
-                        numValue={numLeft}/>
-                    <Button variant="outline-dark" onClick={this.addOperation}>+</Button>
-                    <Button variant="outline-dark" onClick={()=>this.decreaseOperation()}>-</Button>
-                    <Button variant="outline-dark" onClick={()=>this.multiplyOperation()}>*</Button>
-                    <Button variant="outline-dark" onClick={()=>this.rootOperation()}>root</Button>
-                    <NumberInput
-                        numSide="r"
-                        handleNumChange={this.handleNumChangeRight}
-                        numValue={numRight}/>
-                </div>
+                <h1>Calculator</h1>
+                <ListGroup className={"inputArea"}>
+                        <Row>
+                            <NumberInput
+                                numSide="l"
+                                handleNumChange={this.handleNumChangeLeft}
+                                numValue={numLeft}/>
+                        </Row>
+                        <Row>
+                            <NumberInput
+                                numSide="r"
+                                handleNumChange={this.handleNumChangeRight}
+                                numValue={numRight}/>
+                        </Row>
+                        <Row className={"buttonRow"}>
+                            <Button variant="outline-dark" onClick={this.addOperation}>+</Button>
+                            <Button variant="outline-dark" onClick={() => this.decreaseOperation()}>-</Button>
+                            <Button variant="outline-dark" onClick={() => this.multiplyOperation()}>*</Button>
+                            <Button variant="outline-dark" onClick={() => this.rootOperation()}>root</Button>
+                        </Row>
+                </ListGroup>
                 <div className={"outputArea"}>
-                    <ListGroupItem variant="light">Callculation : {this.state.calculationString}</ListGroupItem>
+                    <ListGroupItem variant="light">Calculation : {this.state.calculationString}</ListGroupItem>
                     <ListGroupItem variant="light">Result : {this.state.result}</ListGroupItem>
                 </div>
             </div>
@@ -57,45 +65,88 @@ class Calculator extends React.Component {
         this.setState({numRight: newNum});
     }
 
+    checkIfNum(input) {
+        if (isNaN(input)) {
+            return false
+        } else {
+            return true;
+        }
+    }
+
     addOperation() {
-        let newCalculation = ` ${this.state.numLeft} + ${this.state.numRight} `;
-
-        let newResult = parseInt(this.state.numLeft) + parseInt(this.state.numRight);
-        this.setState({
-            calculationString: newCalculation,
-            result: newResult
-        });
-    }
-    decreaseOperation() {
-        let newCalculation = ` ${this.state.numLeft} - ${this.state.numRight} `;
-
-        let newResult = parseInt(this.state.numLeft) - parseInt(this.state.numRight);
-        this.setState({
-            calculationString: newCalculation,
-            result: newResult
-        });
-    }
-    multiplyOperation() {
-        let newCalculation = ` ${this.state.numLeft} * ${this.state.numRight} `;
-
-        let newResult = parseInt(this.state.numLeft) * parseInt(this.state.numRight);
-        this.setState({
-            calculationString: newCalculation,
-            result: newResult
-        });
-    }
-
-    rootOperation() {
-        const config = { };
-        const math = create(all, config);
+        let numLeft = this.state.numLeft;
+        let numRight = this.state.numRight;
         let newCalculation;
         let newResult;
-        if(this.state.numLeft<=0){
-            newCalculation = ` ${this.state.numLeft} th root of ${this.state.numRight}  not possible -> \n root must be non zero`;
-            newResult = 'not a number';
-        }else{
-            newCalculation = ` ${this.state.numLeft} th root of ${this.state.numRight} `;
-            newResult = math.nthRoot( parseInt(this.state.numRight),parseInt(this.state.numLeft));
+        if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
+            newCalculation = ` ${numLeft} + ${numRight} `;
+            newResult = parseInt(numLeft) + parseInt(numRight);
+        } else {
+            newCalculation = 'not posiible -> invalid input';
+            newResult = " ";
+        }
+
+        this.setState({
+            calculationString: newCalculation,
+            result: newResult
+        });
+    }
+
+    decreaseOperation() {
+        let numLeft = this.state.numLeft;
+        let numRight = this.state.numRight;
+        let newCalculation;
+        let newResult;
+        if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
+            newCalculation = ` ${this.state.numLeft} - ${this.state.numRight} `;
+            newResult = parseInt(this.state.numLeft) - parseInt(this.state.numRight);
+        } else {
+            newCalculation = 'not posiible -> invalid input';
+            newResult = " ";
+        }
+        this.setState({
+            calculationString: newCalculation,
+            result: newResult
+        });
+    }
+
+    multiplyOperation() {
+        let numLeft = this.state.numLeft;
+        let numRight = this.state.numRight;
+        let newCalculation;
+        let newResult;
+        if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
+            newCalculation = ` ${this.state.numLeft} * ${this.state.numRight} `;
+            newResult = parseInt(this.state.numLeft) * parseInt(this.state.numRight);
+        } else {
+            newCalculation = 'not posiible -> invalid input';
+            newResult = " ";
+        }
+        this.setState({
+            calculationString: newCalculation,
+            result: newResult
+        });
+    }
+
+
+    rootOperation() {
+        let numLeft = this.state.numLeft;
+        let numRight = this.state.numRight;
+        let newCalculation;
+        let newResult;
+        if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
+            if (numLeft <= 0) {
+                newCalculation = ` ${numLeft}th root of ${numRight}  not possible -> \n root must be non zero`;
+                newResult = 'not a number';
+            } else {
+                const config = {};
+                const math = create(all, config);
+                newCalculation = ` ${numLeft}th root of ${numRight} `;
+                newResult = math.nthRoot(parseInt(numRight), parseInt(numLeft));
+            }
+        } else {
+            newCalculation = 'not possible -> invalid input';
+            newResult = " ";
         }
 
         this.setState({
@@ -117,7 +168,7 @@ class NumberInput extends React.Component {
     }
 
     handleChange(event) {
-        this.props.handleNumChange(event.target.value.replace(/[^0-9]/g, ''));
+        this.props.handleNumChange(event.target.value);
         //  this.setState({value: event.target.numberValue.replace(/[^0-9]/g, '')});
     }
 
