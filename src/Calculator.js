@@ -29,7 +29,7 @@ class Calculator extends React.Component {
         return (
             <div>
                 <h1>Calculator</h1>
-                <Row className="justify-content-md-center">
+                <Row id={"mainRow"} className="justify-content-md-center">
                     <Col xs lg="3">
                         <NumberInput
                             numSide="l"
@@ -85,6 +85,9 @@ class Calculator extends React.Component {
         } else {
             newCalculation = 'not posiible -> invalid input';
             newResult = " ";
+        }
+        if(calcHistoryItemsCopy.length>6){
+            calcHistoryItemsCopy.shift();
         }
         calcHistoryItemsCopy.push(newCalculation);
         this.setState({

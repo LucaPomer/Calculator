@@ -3,74 +3,103 @@
     background-image: image("/img/notebook-page.jpg");
 
 }
-body{
-    background-image: url("img/notebook-page.jpg") ;
+
+body {
+    background-image: url("img/notebook-page.jpg");
     background-repeat: repeat;
     background-size: cover;
+
+}
+#mainRow{
+    max-width: 100%;
 }
 
 h1 {
     font-family: monospace;
     padding-top: 4%;
 }
-.inputArea{
+
+.row{
+}
+
+.inputArea {
     margin-left: 10rem;
     width: 20rem;
     align-self: center;
 }
-.buttonRow{
-    margin-left: 0!important;
+
+.buttonRow {
     place-content: center;
     align-self: center;
+    justify-content: space-around;
 }
+.buttonRow:first-child{
+    margin-left: 0.5rem !important;
+}
+
 input {
     text-align: center;
     font-weight: bold;
     height: available;
+    width: inherit;
     border: dashed;
-    margin-bottom: 0.5rem !important;
-    margin-top: 0.5rem !important;
-    margin-right: 0.5rem !important;
+    margin: 2% !important;
+
+}
+button{
+    margin: 0.5rem !important;
 }
 
 Button {
-    margin:  0.5rem 0.5rem 0.5rem 0.0rem !important;
+    margin: 0.5rem;
     border-width: medium !important;
     font-weight: bold !important;
     background-color: #ffffff !important;
     font-size: large;
-    width: 4rem;
+    width: 3rem;
 }
 
-button:hover{background-color: #6095ff !important;}
+button:hover {
+    background-color: #6095ff !important;
+}
 
 .outputArea {
     width: 20rem;
     border: solid;
 }
-.list-group-item{
+.col{
+    padding: 2%;
+}
+
+.list-group-item {
     font-family: monospace;
     font-weight: bold;
     font-size: large;
     color: #2e2d30 !important;
     text-align: left;
+    margin-left: 2%;
+    width: inherit;
+    min-width: 10rem;
 }
-.calcHistoryArea{
+
+.calcHistoryArea {
     display: flex;
     flex: fit-content;
 }
 
-.outputArea:first-child{
+.outputArea:first-child {
     border-bottom: none !important;
 }
-.calcHistoryArea .list-group-item
-{
+
+.calcHistoryArea .list-group-item {
     width: 20rem;
 }
-.calcHistoryArea .list-group{
+
+.calcHistoryArea .list-group {
     width: fit-content;
     margin: 0px !important;
 }
+
 .App-link {
     color: #61dafb;
 }
