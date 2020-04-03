@@ -2,10 +2,10 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import {all, create} from 'mathjs'
-import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
+import NumberInput from './NumberInput.js';
+import CalcHistory from "./CalcHistory";
 import Col from "react-bootstrap/esm/Col";
-
 
 class Calculator extends React.Component {
     constructor(props) {
@@ -17,7 +17,8 @@ class Calculator extends React.Component {
             numLeft: 0,
             numRight: 0,
             calculationString: '',
-            result: 0
+            result: 0,
+            calcHistoryList: [],
         }
 
     }
@@ -28,30 +29,29 @@ class Calculator extends React.Component {
         return (
             <div>
                 <h1>Calculator</h1>
-                <ListGroup className={"inputArea"}>
-                        <Row>
-                            <NumberInput
-                                numSide="l"
-                                handleNumChange={this.handleNumChangeLeft}
-                                numValue={numLeft}/>
-                        </Row>
-                        <Row>
-                            <NumberInput
-                                numSide="r"
-                                handleNumChange={this.handleNumChangeRight}
-                                numValue={numRight}/>
-                        </Row>
+                <Row className="justify-content-md-center">
+                    <Col xs lg="3">
+                        <NumberInput
+                            numSide="l"
+                            handleNumChange={this.handleNumChangeLeft}
+                            numValue={numLeft}/>
+                        <NumberInput
+                            numSide="r"
+                            handleNumChange={this.handleNumChangeRight}
+                            numValue={numRight}/>
                         <Row className={"buttonRow"}>
                             <Button variant="outline-dark" onClick={this.addOperation}>+</Button>
                             <Button variant="outline-dark" onClick={() => this.decreaseOperation()}>-</Button>
                             <Button variant="outline-dark" onClick={() => this.multiplyOperation()}>*</Button>
                             <Button variant="outline-dark" onClick={() => this.rootOperation()}>root</Button>
                         </Row>
-                </ListGroup>
-                <div className={"outputArea"}>
-                    <ListGroupItem variant="light">Calculation : {this.state.calculationString}</ListGroupItem>
-                    <ListGroupItem variant="light">Result : {this.state.result}</ListGroupItem>
-                </div>
+                        <ListGroupItem  variant="light">Calculation : {this.state.calculationString}</ListGroupItem>
+                        <ListGroupItem variant="light">Result : {this.state.result}</ListGroupItem>
+                    </Col>
+                    <Col xs lg="3">
+                        <CalcHistory calcHistoryItems={this.state.calcHistoryList}/>
+                    </Col>
+                </Row>
             </div>
 
         )
@@ -78,17 +78,19 @@ class Calculator extends React.Component {
         let numRight = this.state.numRight;
         let newCalculation;
         let newResult;
+        let calcHistoryItemsCopy = this.state.calcHistoryList;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
-            newCalculation = ` ${numLeft} + ${numRight} `;
             newResult = parseInt(numLeft) + parseInt(numRight);
+            newCalculation = ` ${numLeft} + ${numRight} = ${newResult}`;
         } else {
             newCalculation = 'not posiible -> invalid input';
             newResult = " ";
         }
-
+        calcHistoryItemsCopy.push(newCalculation);
         this.setState({
             calculationString: newCalculation,
-            result: newResult
+            result: newResult,
+            calcHistoryList: calcHistoryItemsCopy,
         });
     }
 
@@ -98,8 +100,8 @@ class Calculator extends React.Component {
         let newCalculation;
         let newResult;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
-            newCalculation = ` ${this.state.numLeft} - ${this.state.numRight} `;
-            newResult = parseInt(this.state.numLeft) - parseInt(this.state.numRight);
+            newResult = parseInt(numLeft) - parseInt(numRight);
+            newCalculation = ` ${numLeft} - ${numRight} = ${newResult} `;
         } else {
             newCalculation = 'not posiible -> invalid input';
             newResult = " ";
@@ -116,8 +118,9 @@ class Calculator extends React.Component {
         let newCalculation;
         let newResult;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
-            newCalculation = ` ${this.state.numLeft} * ${this.state.numRight} `;
-            newResult = parseInt(this.state.numLeft) * parseInt(this.state.numRight);
+            newResult = parseInt(numLeft) * parseInt(numRight);
+            newCalculation = ` ${numLeft} * ${numRight} = ${newResult} `;
+
         } else {
             newCalculation = 'not posiible -> invalid input';
             newResult = " ";
@@ -141,8 +144,8 @@ class Calculator extends React.Component {
             } else {
                 const config = {};
                 const math = create(all, config);
-                newCalculation = ` ${numLeft}th root of ${numRight} `;
                 newResult = math.nthRoot(parseInt(numRight), parseInt(numLeft));
+                newCalculation = ` ${numLeft}th root of ${numRight} = ${newResult}`;
             }
         } else {
             newCalculation = 'not possible -> invalid input';
@@ -160,26 +163,6 @@ const numSide = {
     l: 'left',
     r: 'right'
 };
-
-class NumberInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(event) {
-        this.props.handleNumChange(event.target.value);
-        //  this.setState({value: event.target.numberValue.replace(/[^0-9]/g, '')});
-    }
-
-    render() {
-        const numValue = this.props.numValue;
-        return (
-            <input type="text" value={numValue} onChange={this.handleChange}/>
-        );
-    }
-
-}
 
 
 export default Calculator;

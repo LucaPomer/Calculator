@@ -8,10 +8,6 @@ body{
     background-repeat: repeat;
     background-size: cover;
 }
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
 
 h1 {
     font-family: monospace;
@@ -20,18 +16,21 @@ h1 {
 .inputArea{
     margin-left: 10rem;
     width: 20rem;
+    align-self: center;
 }
-.row{
+.buttonRow{
     margin-left: 0!important;
+    place-content: center;
+    align-self: center;
 }
 input {
-    width: 20rem;
     text-align: center;
     font-weight: bold;
     height: available;
     border: dashed;
     margin-bottom: 0.5rem !important;
     margin-top: 0.5rem !important;
+    margin-right: 0.5rem !important;
 }
 
 Button {
@@ -43,14 +42,10 @@ Button {
     width: 4rem;
 }
 
-.buttonRow{
-    align-self: center;
-}
 button:hover{background-color: #6095ff !important;}
 
 .outputArea {
     width: 20rem;
-    margin-left: 10rem;
     border: solid;
 }
 .list-group-item{
@@ -60,12 +55,22 @@ button:hover{background-color: #6095ff !important;}
     color: #2e2d30 !important;
     text-align: left;
 }
+.calcHistoryArea{
+    display: flex;
+    flex: fit-content;
+}
 
 .outputArea:first-child{
     border-bottom: none !important;
 }
-
-
+.calcHistoryArea .list-group-item
+{
+    width: 20rem;
+}
+.calcHistoryArea .list-group{
+    width: fit-content;
+    margin: 0px !important;
+}
 .App-link {
     color: #61dafb;
 }
