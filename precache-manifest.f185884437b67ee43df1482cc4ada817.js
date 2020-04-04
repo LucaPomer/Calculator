@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fb8af0fa2dec03f000384837b35495d9",
+    "revision": "b816c98ebb09dccef9ed46847b77c7c7",
     "url": "/Calculator/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Calculator/static/css/2.de424728.chunk.css"
   },
   {
-    "revision": "085603b349a6224cf088",
-    "url": "/Calculator/static/css/main.a3fb5a58.chunk.css"
+    "revision": "da346b614b5d0c79bc98",
+    "url": "/Calculator/static/css/main.f507ac6a.chunk.css"
   },
   {
     "revision": "eb8cbf55a48b6fc37714",
@@ -20,15 +20,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Calculator/static/js/2.ce3b3fd7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "085603b349a6224cf088",
-    "url": "/Calculator/static/js/main.7dba72c1.chunk.js"
+    "revision": "da346b614b5d0c79bc98",
+    "url": "/Calculator/static/js/main.c338620a.chunk.js"
   },
   {
     "revision": "8eed4c031c5d49b6f8b8",
     "url": "/Calculator/static/js/runtime-main.d20034b6.js"
   },
   {
-    "revision": "e37fd80d967dfde7fe56ccbb45fac762",
-    "url": "/Calculator/static/media/notebook-page.e37fd80d.jpg"
+    "revision": "8ff71ff98fa4d5ef4d472f1f04de809b",
+    "url": "/Calculator/static/media/paper.8ff71ff9.jpg"
   }
 ]);
