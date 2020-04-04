@@ -6,6 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 A binary calculator that lets you do simple operations and see the resent calculation history.
 
+![screenshot](pc.png)
+
+
 
 ## Available Scripts
 
