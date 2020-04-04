@@ -1,13 +1,11 @@
 .App {
     text-align: center;
-    background-image: image("/img/notebook-page.jpg");
-
 }
 
 body {
-    background-image: url("img/notebook-page.jpg");
-    background-repeat: repeat;
+    background-image: url("img/paper.jpg") ;
     background-size: cover;
+    background-attachment: fixed;
 
 }
 #mainRow{
@@ -75,12 +73,15 @@ button:hover {
     color: #2e2d30 !important;
     text-align: left;
     width: inherit;
-    min-width: 10rem;
+    min-width: 15rem;
     border-color: #2e2d30 !important;
 }
 
 .historyArea .list-group-item:first-child{
     margin-top: 1%;
+}
+.historyArea{
+    min-width: 15rem;
 }
 
 
