@@ -1,11 +1,14 @@
 # Binary Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## About
 
 A binary calculator that lets you do simple operations and see the resent calculation history.
 
+![screenshot](pc.png)
+
+## Link to the Web-App 
+
+http://LucaPomer.github.io/Calculator
 
 ## Available Scripts
 
