@@ -40,8 +40,7 @@ input {
     text-align: center;
     font-weight: bold;
     font-size: large !important;
-    height: 15%;
-    max-height: 15%;
+    height: 3rem!important;
     width: inherit;
     border: dashed;
     margin-bottom: 2% !important;
@@ -56,7 +55,7 @@ Button {
     margin: 0.5rem;
     border-width: medium !important;
     font-weight: bold !important;
-    background-color: #f7f3ee !important;
+    background-color: #ffffff !important;
     font-size: large;
     width: 3rem;
 }
@@ -83,6 +82,7 @@ button:hover {
 .historyArea .list-group-item:first-child{
     margin-top: 1%;
 }
+
 
 .App-link {
     color: #61dafb;
