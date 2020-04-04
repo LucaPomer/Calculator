@@ -30,7 +30,8 @@ class Calculator extends React.Component {
             <div>
                 <h1>Calculator</h1>
                 <Row id={"mainRow"} className="justify-content-md-center">
-                    <Col xs lg="3">
+                    <Col className={"calcArea"} xs lg="3">
+                        <h2>Input</h2>
                         <NumberInput
                             numSide="l"
                             handleNumChange={this.handleNumChangeLeft}
@@ -45,10 +46,11 @@ class Calculator extends React.Component {
                             <Button variant="outline-dark" onClick={() => this.multiplyOperation()}>*</Button>
                             <Button variant="outline-dark" onClick={() => this.rootOperation()}>root</Button>
                         </Row>
-                        <ListGroupItem  variant="light">Calculation : {this.state.calculationString}</ListGroupItem>
+                        <ListGroupItem variant="light">Calculation : {this.state.calculationString}</ListGroupItem>
                         <ListGroupItem variant="light">Result : {this.state.result}</ListGroupItem>
                     </Col>
-                    <Col xs lg="3">
+                    <Col className={"historyArea"} xs lg="3">
+                        <h2>History</h2>
                         <CalcHistory calcHistoryItems={this.state.calcHistoryList}/>
                     </Col>
                 </Row>
@@ -86,10 +88,12 @@ class Calculator extends React.Component {
             newCalculation = 'not posiible -> invalid input';
             newResult = " ";
         }
-        if(calcHistoryItemsCopy.length>6){
+
+        calcHistoryItemsCopy.push(newCalculation);
+        if (calcHistoryItemsCopy.length > 6) {
             calcHistoryItemsCopy.shift();
         }
-        calcHistoryItemsCopy.push(newCalculation);
+
         this.setState({
             calculationString: newCalculation,
             result: newResult,
@@ -102,12 +106,17 @@ class Calculator extends React.Component {
         let numRight = this.state.numRight;
         let newCalculation;
         let newResult;
+        let calcHistoryItemsCopy = this.state.calcHistoryList;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
             newResult = parseInt(numLeft) - parseInt(numRight);
             newCalculation = ` ${numLeft} - ${numRight} = ${newResult} `;
         } else {
             newCalculation = 'not posiible -> invalid input';
             newResult = " ";
+        }
+        calcHistoryItemsCopy.push(newCalculation);
+        if (calcHistoryItemsCopy.length > 6) {
+            calcHistoryItemsCopy.shift();
         }
         this.setState({
             calculationString: newCalculation,
@@ -120,6 +129,7 @@ class Calculator extends React.Component {
         let numRight = this.state.numRight;
         let newCalculation;
         let newResult;
+        let calcHistoryItemsCopy = this.state.calcHistoryList;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
             newResult = parseInt(numLeft) * parseInt(numRight);
             newCalculation = ` ${numLeft} * ${numRight} = ${newResult} `;
@@ -127,6 +137,10 @@ class Calculator extends React.Component {
         } else {
             newCalculation = 'not posiible -> invalid input';
             newResult = " ";
+        }
+        calcHistoryItemsCopy.push(newCalculation);
+        if (calcHistoryItemsCopy.length > 6) {
+            calcHistoryItemsCopy.shift();
         }
         this.setState({
             calculationString: newCalculation,
@@ -140,19 +154,25 @@ class Calculator extends React.Component {
         let numRight = this.state.numRight;
         let newCalculation;
         let newResult;
+        let calcHistoryItemsCopy = this.state.calcHistoryList;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
-            if (numLeft <= 0) {
-                newCalculation = ` ${numLeft}th root of ${numRight}  not possible -> \n root must be non zero`;
-                newResult = 'not a number';
+            if (numRight <= 0) {
+                newCalculation = ` ${numLeft} root ${numRight} not possible `;
+                newResult = 'root must be non zero';
             } else {
                 const config = {};
                 const math = create(all, config);
-                newResult = math.nthRoot(parseInt(numRight), parseInt(numLeft));
-                newCalculation = ` ${numLeft}th root of ${numRight} = ${newResult}`;
+                newResult = math.sqrt(parseInt(numRight));
+                newResult*=parseInt(numLeft);
+                newCalculation = ` ${numLeft} root ${numRight} = ${newResult}`;
             }
         } else {
             newCalculation = 'not possible -> invalid input';
             newResult = " ";
+        }
+        calcHistoryItemsCopy.push(newCalculation);
+        if (calcHistoryItemsCopy.length > 6) {
+            calcHistoryItemsCopy.shift();
         }
 
         this.setState({

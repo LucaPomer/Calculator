@@ -12,6 +12,8 @@ body {
 }
 #mainRow{
     max-width: 100%;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 h1 {
@@ -19,19 +21,16 @@ h1 {
     padding-top: 4%;
 }
 
-.row{
+h2 {
+    font-family: monospace;
 }
 
-.inputArea {
-    margin-left: 10rem;
-    width: 20rem;
-    align-self: center;
-}
 
 .buttonRow {
     place-content: center;
     align-self: center;
     justify-content: space-around;
+    margin-bottom: 1.5%;
 }
 .buttonRow:first-child{
     margin-left: 0.5rem !important;
@@ -40,10 +39,13 @@ h1 {
 input {
     text-align: center;
     font-weight: bold;
-    height: available;
+    font-size: large !important;
+    height: 15%;
+    max-height: 15%;
     width: inherit;
     border: dashed;
-    margin: 2% !important;
+    margin-bottom: 2% !important;
+    margin-top: 1.5% !important;
 
 }
 button{
@@ -54,7 +56,7 @@ Button {
     margin: 0.5rem;
     border-width: medium !important;
     font-weight: bold !important;
-    background-color: #ffffff !important;
+    background-color: #f7f3ee !important;
     font-size: large;
     width: 3rem;
 }
@@ -63,10 +65,6 @@ button:hover {
     background-color: #6095ff !important;
 }
 
-.outputArea {
-    width: 20rem;
-    border: solid;
-}
 .col{
     padding: 2%;
 }
@@ -77,27 +75,13 @@ button:hover {
     font-size: large;
     color: #2e2d30 !important;
     text-align: left;
-    margin-left: 2%;
     width: inherit;
     min-width: 10rem;
+    border-color: #2e2d30 !important;
 }
 
-.calcHistoryArea {
-    display: flex;
-    flex: fit-content;
-}
-
-.outputArea:first-child {
-    border-bottom: none !important;
-}
-
-.calcHistoryArea .list-group-item {
-    width: 20rem;
-}
-
-.calcHistoryArea .list-group {
-    width: fit-content;
-    margin: 0px !important;
+.historyArea .list-group-item:first-child{
+    margin-top: 1%;
 }
 
 .App-link {
