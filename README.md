@@ -4,7 +4,7 @@
 
 A binary calculator that lets you do simple operations and see the resent calculation history.
 
-![screenshot](pc.png)
+![screenshot](mockup.png)
 
 ## Link to the Web-App 
 
