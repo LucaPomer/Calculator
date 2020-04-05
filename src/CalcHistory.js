@@ -7,8 +7,8 @@ class CalcHistory extends React.Component {
         const historyItems = this.props.calcHistoryItems;
         let historyItemsList = [];
         let index = 0;
-        for (let key of historyItems){
-            historyItemsList.push(<ListGroupItem key={index}>{key}
+        for (let key of historyItems) {
+            historyItemsList.push(<ListGroupItem variant="light" key={index}>{key}
             </ListGroupItem>);
             index++;
         }

@@ -8,13 +8,12 @@ class NumberInput extends React.Component {
 
     handleChange(event) {
         this.props.handleNumChange(event.target.value);
-        //  this.setState({value: event.target.numberValue.replace(/[^0-9]/g, '')});
     }
 
     render() {
         const numValue = this.props.numValue;
         return (
-            <input type="text" value={numValue} onChange={this.handleChange}/>
+            <input placeholder={"Write a number"} type="text" value={numValue} onChange={this.handleChange}/>
         );
     }
 

@@ -14,8 +14,8 @@ class Calculator extends React.Component {
         this.handleNumChangeRight = this.handleNumChangeRight.bind(this);
         this.addOperation = this.addOperation.bind(this);
         this.state = {
-            numLeft: 0,
-            numRight: 0,
+            numLeft: '',
+            numRight: '',
             calculationString: '',
             result: 0,
             calcHistoryList: [],
@@ -29,39 +29,39 @@ class Calculator extends React.Component {
         return (
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"/>
-                    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css"/>
-                        <h1>Calculator</h1>
-                        <Row id={"mainRow"} className="justify-content-md-center">
-                            <Col className={"calcArea"} xs lg="3">
-                                <h2>Input</h2>
-                                <NumberInput
-                                    handleNumChange={this.handleNumChangeLeft}
-                                    numValue={numLeft}/>
-                                <NumberInput
-                                    handleNumChange={this.handleNumChangeRight}
-                                    numValue={numRight}/>
-                                <Row className={"buttonRow"}>
-                                    <Button variant="outline-dark" onClick={this.addOperation}><i
-                                        className="fas fa-plus"/></Button>
-                                    <Button variant="outline-dark" onClick={() => this.decreaseOperation()}><i
-                                        className="fas fa-minus"/></Button>
-                                    <Button variant="outline-dark" onClick={() => this.multiplyOperation()}><i
-                                        className="fa fa-close"/></Button>
-                                    <Button variant="outline-dark" onClick={() => this.rootOperation()}><i
-                                        className="fa fa-square-root-alt"/></Button>
-                                </Row>
-                                <ListGroupItem variant="light">Calculation
-                                    : {this.state.calculationString}</ListGroupItem>
-                                <ListGroupItem variant="light">Result : {this.state.result}</ListGroupItem>
-                            </Col>
-                            <Col className={"historyArea"} xs lg="3">
-                                <h2>History</h2>
-                                <CalcHistory calcHistoryItems={this.state.calcHistoryList}/>
-                            </Col>
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css"/>
+                <h1>Calculator</h1>
+                <Row id={"mainRow"} className="justify-content-md-center">
+                    <Col className={"calcArea"} xs lg="3">
+                        <h2>Input</h2>
+                        <NumberInput
+                            handleNumChange={this.handleNumChangeLeft}
+                            numValue={numLeft}/>
+                        <NumberInput
+                            handleNumChange={this.handleNumChangeRight}
+                            numValue={numRight}/>
+                        <Row className={"buttonRow"}>
+                            <Button variant="outline-dark" onClick={this.addOperation}><i
+                                className="fas fa-plus"/></Button>
+                            <Button variant="outline-dark" onClick={() => this.decreaseOperation()}><i
+                                className="fas fa-minus"/></Button>
+                            <Button variant="outline-dark" onClick={() => this.multiplyOperation()}><i
+                                className="fa fa-close"/></Button>
+                            <Button variant="outline-dark" onClick={() => this.rootOperation()}><i
+                                className="fa fa-square-root-alt"/></Button>
                         </Row>
+                        <ListGroupItem variant="light">Calculation
+                            : {this.state.calculationString}</ListGroupItem>
+                        <ListGroupItem variant="light">Result : {this.state.result}</ListGroupItem>
+                    </Col>
+                    <Col className={"historyArea"} xs lg="3">
+                        <h2>History</h2>
+                        <CalcHistory calcHistoryItems={this.state.calcHistoryList}/>
+                    </Col>
+                </Row>
             </div>
 
-    )
+        )
     }
 
     handleNumChangeLeft(newNum) {
@@ -73,11 +73,11 @@ class Calculator extends React.Component {
     }
 
     checkIfNum(input) {
-        if (isNaN(input)) {
-        return false
-    } else {
-        return true;
-    }
+        if (isNaN(input) || !input) {
+            return false
+        } else {
+            return true;
+        }
     }
 
     addOperation() {
@@ -87,23 +87,23 @@ class Calculator extends React.Component {
         let newResult;
         let calcHistoryItemsCopy = this.state.calcHistoryList;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
-        newResult = parseInt(numLeft) + parseInt(numRight);
-        newCalculation = ` ${numLeft} + ${numRight} = ${newResult}`;
-    } else {
-        newCalculation = 'not posiible -> invalid input';
-        newResult = " ";
-    }
+            newResult = parseInt(numLeft) + parseInt(numRight);
+            newCalculation = ` ${numLeft} + ${numRight} = ${newResult}`;
+        } else {
+            newCalculation = 'Invalid input';
+            newResult = " ";
+        }
 
         calcHistoryItemsCopy.unshift(newCalculation);
         if (calcHistoryItemsCopy.length > 6) {
-        calcHistoryItemsCopy.pop();
-    }
+            calcHistoryItemsCopy.pop();
+        }
 
         this.setState({
-        calculationString: newCalculation,
-        result: newResult,
-        calcHistoryList: calcHistoryItemsCopy,
-    });
+            calculationString: newCalculation,
+            result: newResult,
+            calcHistoryList: calcHistoryItemsCopy,
+        });
     }
 
     decreaseOperation() {
@@ -113,20 +113,20 @@ class Calculator extends React.Component {
         let newResult;
         let calcHistoryItemsCopy = this.state.calcHistoryList;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
-        newResult = parseInt(numLeft) - parseInt(numRight);
-        newCalculation = ` ${numLeft} - ${numRight} = ${newResult} `;
-    } else {
-        newCalculation = 'not posiible -> invalid input';
-        newResult = " ";
-    }
+            newResult = parseInt(numLeft) - parseInt(numRight);
+            newCalculation = ` ${numLeft} - ${numRight} = ${newResult} `;
+        } else {
+            newCalculation = 'Invalid input';
+            newResult = " ";
+        }
         calcHistoryItemsCopy.unshift(newCalculation);
         if (calcHistoryItemsCopy.length > 6) {
-        calcHistoryItemsCopy.pop();
-    }
+            calcHistoryItemsCopy.pop();
+        }
         this.setState({
-        calculationString: newCalculation,
-        result: newResult
-    });
+            calculationString: newCalculation,
+            result: newResult
+        });
     }
 
     multiplyOperation() {
@@ -136,21 +136,21 @@ class Calculator extends React.Component {
         let newResult;
         let calcHistoryItemsCopy = this.state.calcHistoryList;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
-        newResult = parseInt(numLeft) * parseInt(numRight);
-        newCalculation = ` ${numLeft} x ${numRight} = ${newResult} `;
+            newResult = parseInt(numLeft) * parseInt(numRight);
+            newCalculation = ` ${numLeft} x ${numRight} = ${newResult} `;
 
-    } else {
-        newCalculation = 'not posiible -> invalid input';
-        newResult = " ";
-    }
+        } else {
+            newCalculation = 'Invalid input';
+            newResult = " ";
+        }
         calcHistoryItemsCopy.unshift(newCalculation);
         if (calcHistoryItemsCopy.length > 6) {
-        calcHistoryItemsCopy.pop();
-    }
+            calcHistoryItemsCopy.pop();
+        }
         this.setState({
-        calculationString: newCalculation,
-        result: newResult
-    });
+            calculationString: newCalculation,
+            result: newResult
+        });
     }
 
 
@@ -161,31 +161,30 @@ class Calculator extends React.Component {
         let newResult;
         let calcHistoryItemsCopy = this.state.calcHistoryList;
         if (this.checkIfNum(numLeft) && this.checkIfNum(numRight)) {
-        if (numRight <= 0) {
-        newCalculation = ` ${numLeft} √ ${numRight} not possible `;
-        newResult = 'root must be non zero';
-    } else {
-        newResult = Math.sqrt(parseInt(numRight));
-        newResult*=parseInt(numLeft);
-        newResult=newResult.toFixed(3);
-        newCalculation = ` ${numLeft} √ ${numRight} = ${newResult}`;
-    }
-    } else {
-        newCalculation = 'not possible -> invalid input';
-        newResult = " ";
-    }
+            if (numRight <= 0) {
+                newCalculation = ` ${numLeft} √ ${numRight} not possible `;
+                newResult = 'root must be non zero';
+            } else {
+                newResult = Math.sqrt(parseInt(numRight));
+                newResult *= parseInt(numLeft);
+                newResult = newResult.toFixed(3);
+                newCalculation = ` ${numLeft} √ ${numRight} = ${newResult}`;
+            }
+        } else {
+            newCalculation = 'Invalid input';
+            newResult = " ";
+        }
         calcHistoryItemsCopy.unshift(newCalculation);
         if (calcHistoryItemsCopy.length > 6) {
-        calcHistoryItemsCopy.pop();
-    }
+            calcHistoryItemsCopy.pop();
+        }
 
         this.setState({
-        calculationString: newCalculation,
-        result: newResult
-    });
+            calculationString: newCalculation,
+            result: newResult
+        });
     }
-    }
+}
 
 
-
-    export default Calculator;
+export default Calculator;
