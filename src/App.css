@@ -39,7 +39,6 @@ input {
     text-align: center;
     font-weight: bold;
     font-size: large !important;
-    font-style: italic;
     height: 3rem !important;
     width: inherit;
     border: thin solid;
@@ -47,6 +46,11 @@ input {
     margin-top: 1.5% !important;
 }
 
+input::placeholder{
+    font-style: italic;
+    font-weight: normal;
+    color: #cccccc;
+}
 button {
     margin: 0.5rem !important;
 }
@@ -91,6 +95,8 @@ button:hover {
 .historyArea .list-group-item {
     height: auto;
 }
+
+
 
 .App-link {
     color: #61dafb;
